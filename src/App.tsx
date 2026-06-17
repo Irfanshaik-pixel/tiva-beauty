@@ -304,8 +304,6 @@ export default function App() {
       {/* 5. Ingredient Codex */}
       <IngredientCodex />
 
-      {/* 6. AI Consultation Diagnostic */}
-      <RitualConsultant />
 
       {/* 7. Brand Journal Columns */}
       <Journal />
