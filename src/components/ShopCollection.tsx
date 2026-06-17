@@ -127,14 +127,15 @@ export default function ShopCollection({ onAddProduct, onProductClick, onNotifyM
                 <div className="absolute inset-0 bg-charcoal/10 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
                 {/* Inspect Overlay Trigger */}
-                <div className="absolute inset-0 flex items-center justify-center space-x-2 opacity-0 group-hover/card:opacity-100 transition-all duration-300 z-10 pointer-events-none">
+                <div className="absolute inset-0 flex flex-col items-center justify-center space-y-3 opacity-0 group-hover/card:opacity-100 transition-all duration-300 z-10 pointer-events-none">
                   <button
-                    onClick={(e) => { e.stopPropagation(); onProductClick(product.id); }}
-                    className="p-3 bg-white/95 rounded-full hover:bg-gold hover:text-white transition-colors cursor-pointer pointer-events-auto shadow-sm"
-                    title="Inspect Formulation"
-                    aria-label={`Inspect ${product.name}`}
+                    onClick={(e) => { e.stopPropagation(); setModalProduct(product); }}
+                    className="px-6 py-2.5 bg-white/95 rounded-full hover:bg-gold hover:text-white text-[10px] uppercase tracking-widest font-mono transition-colors cursor-pointer pointer-events-auto shadow-sm flex items-center space-x-2"
+                    title="Quick View Formulation"
+                    aria-label={`Quick View ${product.name}`}
                   >
-                    <Eye className="w-4.5 h-4.5 stroke-[1.5]" />
+                    <Eye className="w-3.5 h-3.5 stroke-[1.5]" />
+                    <span>Quick View</span>
                   </button>
                 </div>
 
