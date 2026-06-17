@@ -1,4 +1,5 @@
 import { useState, useEffect, FormEvent } from "react";
+import { Routes, Route, useNavigate, useLocation, useParams } from "react-router-dom";
 import { HelpCircle, ChevronDown, Send, Check, Sparkles, MapPin, Mail, Instagram, ArrowUp } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
@@ -24,10 +25,36 @@ import AiRitualsPage from "./components/AiRitualsPage";
 import { PRODUCTS } from "./data";
 import { Product, CartItem } from "./types";
 
+// --- Route Wrappers ---
+
+const ProductDetailWrapper = ({ onAddToCart }: { onAddToCart: (product: Product) => void }) => {
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+  return (
+    <ProductDetail 
+      productId={id || "tiva-sunscreen"}
+      onBack={() => { navigate("/"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+      onAddToCart={onAddToCart}
+      onNotifyMe={() => { navigate("/waitlist"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+    />
+  );
+};
+
+const ArticlePageWrapper = () => {
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+  return (
+    <ArticlePage 
+      id={Number(id)} 
+      onBack={() => { navigate("/journal"); window.scrollTo({ top: 0, behavior: "smooth" }); }} 
+    />
+  );
+};
+
 export default function App() {
-  const [viewMode, setViewMode] = useState<"storefront" | "product" | "ingredients" | "journal" | "article" | "consultant" | "checkout" | "waitlist">("storefront");
-  const [selectedProductId, setSelectedProductId] = useState<string>("tiva-sunscreen");
-  const [selectedArticleId, setSelectedArticleId] = useState<number | null>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [currentSection, setCurrentSection] = useState<string>("home");
   const [cart, setCart] = useState<CartItem[]>(() => {
     try {
@@ -45,6 +72,20 @@ export default function App() {
   });
   const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  
+  // FAQ accordion state
+  const [activeFaq, setActiveFaq] = useState<number | null>(null);
+
+  // Inquiry form states
+  const [inquiryName, setInquiryName] = useState<string>("");
+  const [inquiryEmail, setInquiryEmail] = useState<string>("");
+  const [inquiryMsg, setInquiryMsg] = useState<string>("");
+  const [inquirySent, setInquirySent] = useState<boolean>(false);
+
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   // Persist cart to localStorage whenever it changes
   useEffect(() => {
@@ -61,42 +102,45 @@ export default function App() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  
-  // FAQ accordion state
-  const [activeFaq, setActiveFaq] = useState<number | null>(null);
-
-  // Inquiry form states
-  const [inquiryName, setInquiryName] = useState<string>("");
-  const [inquiryEmail, setInquiryEmail] = useState<string>("");
-  const [inquiryMsg, setInquiryMsg] = useState<string>("");
-  const [inquirySent, setInquirySent] = useState<boolean>(false);
 
   // Smooth-scroll navigation
   const handleNavigate = (sectionId: string) => {
     setCurrentSection(sectionId);
 
+    // Route-based pages
     if (sectionId === "ingredients") {
-      setViewMode("ingredients");
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      navigate("/ingredients");
       return;
     }
-    
     if (sectionId === "journal") {
-      setViewMode("journal");
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      navigate("/journal");
       return;
     }
-
     if (sectionId === "consultant") {
-      setViewMode("consultant");
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      navigate("/ai-rituals");
       return;
     }
 
-    if (viewMode !== "storefront") {
-      setViewMode("storefront");
+    // Scroll-based sections on the storefront
+    if (location.pathname !== "/") {
+      navigate("/");
+      // Wait for home page to render before scrolling
+      setTimeout(() => {
+        if (sectionId === "home") {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+          return;
+        }
+        const element = document.getElementById(`${sectionId}-section`);
+        if (element) {
+          const offset = 80; // height of fixed header
+          const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+          window.scrollTo({ top: elementPosition - offset, behavior: "smooth" });
+        }
+      }, 100);
+      return;
     }
     
+    // Already on home page
     if (sectionId === "home") {
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
@@ -105,7 +149,7 @@ export default function App() {
     setTimeout(() => {
       const element = document.getElementById(`${sectionId}-section`);
       if (element) {
-        const offset = 80; // height of fixed header
+        const offset = 80;
         const elementPosition = element.getBoundingClientRect().top + window.scrollY;
         window.scrollTo({
           top: elementPosition - offset,
@@ -186,58 +230,26 @@ export default function App() {
     }, 1500);
   };
 
-  return (
-    <div className="min-h-screen bg-ivory text-charcoal font-sans selection:bg-gold/20 selection:text-charcoal relative">
-      
-      {/* 1. Global Navigation Bar */}
-      {viewMode !== "consultant" && viewMode !== "checkout" && viewMode !== "waitlist" && (
-        <Navigation
-          currentSection={currentSection}
-          onNavigate={(section) => {
-            handleNavigate(section);
-          }}
-          cartCount={cartTotalCount}
-          onOpenCart={() => setIsCartOpen(true)}
-        />
-      )}
+  const hideNavigation = ["/ai-rituals", "/checkout", "/waitlist"].includes(location.pathname);
 
-      {viewMode === "product" ? (
-        <ProductDetail 
-          productId={selectedProductId}
-          onBack={() => { setViewMode("storefront"); setCurrentSection("shop"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-          onAddToCart={handleAddToCart}
-          onNotifyMe={() => { setViewMode("waitlist"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-        />
-      ) : viewMode === "ingredients" ? (
-        <IngredientsPage />
-      ) : viewMode === "journal" ? (
-        <JournalPage onArticleClick={(id) => { setSelectedArticleId(id); setViewMode("article"); window.scrollTo({ top: 0, behavior: "smooth" }); }} />
-      ) : viewMode === "article" && selectedArticleId ? (
-        <ArticlePage id={selectedArticleId} onBack={() => { setViewMode("journal"); window.scrollTo({ top: 0, behavior: "smooth" }); }} />
-      ) : viewMode === "consultant" ? (
-        <AiRitualsPage onBack={() => { setViewMode("storefront"); setCurrentSection("home"); window.scrollTo({ top: 0, behavior: "smooth" }); }} />
-      ) : viewMode === "checkout" ? (
-        <CheckoutExperience cart={cart} onBack={() => { setViewMode("storefront"); setIsCartOpen(true); }} onClearCart={() => setCart([])} />
-      ) : viewMode === "waitlist" ? (
-        <WaitlistRitual onBack={() => { setViewMode("storefront"); setCurrentSection("shop"); window.scrollTo({ top: 0, behavior: "smooth" }); }} />
-      ) : (
-        <>
-          {/* 2. Interactive Scrolling Hero */}
-          <Hero
-            onExplore={() => handleNavigate("shop")}
-            onDiscoverRitual={() => handleNavigate("philosophy")}
-            onAddProduct={handleAddToCart}
-            onProductClick={(id) => { setSelectedProductId(id); setViewMode("product"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-            onNotifyClick={() => { setViewMode("waitlist"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-          />
+  // The Storefront (Home Page) component
+  const Storefront = () => (
+    <>
+      {/* 2. Interactive Scrolling Hero */}
+      <Hero
+        onExplore={() => handleNavigate("shop")}
+        onDiscoverRitual={() => handleNavigate("philosophy")}
+        onAddProduct={handleAddToCart}
+        onProductClick={(id) => navigate(`/product/${id}`)}
+        onNotifyClick={() => navigate("/waitlist")}
+      />
 
-          {/* 3. BRAND PHILOSOPHY SECTION */}
-          <section
+      {/* 3. BRAND PHILOSOPHY SECTION */}
+      <section
         className="bg-white py-24 md:py-32 scroll-mt-20 border-y border-beige/40 text-center relative overflow-hidden"
         id="philosophy-section"
       >
         <div className="absolute inset-0 z-0 opacity-15 pointer-events-none">
-          {/* Subtle background luxury text */}
           <span className="absolute left-[5%] top-1/4 font-serif text-[18vh] italic text-beige/50 select-none leading-none">
             Intention
           </span>
@@ -258,24 +270,16 @@ export default function App() {
           <div className="w-16 h-[1.5px] bg-gold/70 my-8" />
 
           <p className="font-serif text-lg md:text-2xl text-taupe leading-relaxed italic max-w-3xl font-light">
-            “At TIVA, we believe luxury is found in simplicity. Every formula begins with a question: What does your skin truly need? Nothing more. Nothing unnecessary. Only purposeful ingredients selected for performance, comfort, and timelessness.”
+            "We believe that the skin is a delicate ecosystem. It does not need to be overwhelmed with ten-step routines or aggressive actives. It needs to be understood, protected, and restored with botanical precision."
           </p>
-
-          <div className="flex justify-center items-center space-x-6 pt-10 font-mono text-[9px] tracking-[0.3em] text-charcoal/40 uppercase">
-            <span>PREMIUM FORMULATION</span>
-            <span>•</span>
-            <span>MINIMUM INGREDIENTS</span>
-            <span>•</span>
-            <span>CELL CO-OPERATION</span>
-          </div>
         </div>
       </section>
 
       {/* 4. Complete Shop Collection */}
       <ShopCollection 
         onAddProduct={handleAddToCart}
-        onProductClick={(id) => { setSelectedProductId(id); setViewMode("product"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-        onNotifyMe={() => { setViewMode("waitlist"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+        onProductClick={(id) => navigate(`/product/${id}`)}
+        onNotifyMe={() => navigate("/waitlist")}
       />
 
       {/* 4.5. Social Proof & Reviews */}
@@ -458,8 +462,33 @@ export default function App() {
 
         </div>
       </section>
-      </>
+    </>
+  );
+
+  return (
+    <div className="min-h-screen bg-ivory text-charcoal font-sans selection:bg-gold/20 selection:text-charcoal relative">
+      
+      {/* 1. Global Navigation Bar */}
+      {!hideNavigation && (
+        <Navigation
+          currentSection={currentSection}
+          onNavigate={handleNavigate}
+          cartCount={cartTotalCount}
+          onOpenCart={() => setIsCartOpen(true)}
+        />
       )}
+
+      {/* MAIN ROUTER OUTLET */}
+      <Routes>
+        <Route path="/" element={<Storefront />} />
+        <Route path="/product/:id" element={<ProductDetailWrapper onAddToCart={handleAddToCart} />} />
+        <Route path="/ingredients" element={<IngredientsPage />} />
+        <Route path="/journal" element={<JournalPage onArticleClick={(id) => navigate(`/journal/${id}`)} />} />
+        <Route path="/journal/:id" element={<ArticlePageWrapper />} />
+        <Route path="/ai-rituals" element={<AiRitualsPage onBack={() => navigate("/")} />} />
+        <Route path="/checkout" element={<CheckoutExperience cart={cart} onBack={() => { navigate("/"); setIsCartOpen(true); }} onClearCart={() => setCart([])} />} />
+        <Route path="/waitlist" element={<WaitlistRitual onBack={() => navigate("/")} />} />
+      </Routes>
 
       {/* 9. LUXURY FOOTER BRAND SIGNATURE */}
       <footer className="bg-charcoal text-ivory py-16 px-6 md:px-12 border-t border-beige/10">
@@ -547,11 +576,9 @@ export default function App() {
         onClearCart={handleClearCart}
         onCheckout={() => {
           setIsCartOpen(false);
-          setViewMode("checkout");
-          window.scrollTo({ top: 0, behavior: "smooth" });
+          navigate("/checkout");
         }}
       />
-
 
       {/* 12. Scroll-to-Top Button */}
       <AnimatePresence>
