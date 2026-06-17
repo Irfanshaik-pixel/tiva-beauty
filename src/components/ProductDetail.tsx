@@ -217,7 +217,7 @@ export default function ProductDetail({ productId, onBack, onAddToCart, onNotify
                     </span>
                   </div>
                   
-                  <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 opacity-60 pointer-events-none">
+                  <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
                     {SHADES.map((shadeObj) => (
                       <button
                         key={shadeObj.name}
