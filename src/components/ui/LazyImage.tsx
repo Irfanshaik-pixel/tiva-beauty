@@ -51,7 +51,7 @@ export default function LazyImage({
   return (
     <div 
       ref={containerRef} 
-      className={`relative overflow-hidden ${containerClassName}`}
+      className={`relative w-full h-full overflow-hidden ${containerClassName}`}
     >
       {/* 
         Frosted Glass / Blur-Up Placeholder 
