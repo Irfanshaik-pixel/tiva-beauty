@@ -171,7 +171,7 @@ export default function Hero({ onExplore, onDiscoverRitual, onAddProduct, onProd
                 <img 
                   src={productFrontImg} 
                   alt="TIVA Product Front" 
-                  className="w-full h-full object-contain mix-blend-multiply drop-shadow-2xl scale-[1.35] lg:scale-150" 
+                  className="w-full h-full object-contain drop-shadow-2xl scale-[1.35] lg:scale-150" 
                 />
               </div>
 
@@ -183,7 +183,7 @@ export default function Hero({ onExplore, onDiscoverRitual, onAddProduct, onProd
                 <img 
                   src={productBackImg} 
                   alt="TIVA Product Back" 
-                  className="w-full h-full object-contain mix-blend-multiply drop-shadow-2xl scale-[1.35] lg:scale-150" 
+                  className="w-full h-full object-contain drop-shadow-2xl scale-[1.35] lg:scale-150" 
                 />
               </div>
             </motion.div>
