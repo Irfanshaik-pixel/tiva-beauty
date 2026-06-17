@@ -3,41 +3,130 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Google AI Studio App</title>
-    <script>
-      (function() {
-        try {
-          var currentFetch = window.fetch;
-          Object.defineProperty(window, 'fetch', {
-            get: function() {
-              return currentFetch;
-            },
-            set: function(val) {
-              currentFetch = val;
-            },
-            configurable: true,
-            enumerable: true
-          });
-        } catch (e) {
-          try {
-            // Fallback: define it on the prototype of Window
-            var proto = Object.getPrototypeOf(window);
-            var currentFetchProto = window.fetch;
-            Object.defineProperty(proto, 'fetch', {
-              get: function() {
-                return currentFetchProto;
-              },
-              set: function(val) {
-                currentFetchProto = val;
-              },
-              configurable: true,
-              enumerable: true
-            });
-          } catch (err) {
-            console.warn("Fetch patch disabled or failed:", err);
+
+    <!-- Primary SEO -->
+    <title>TIVA Beauty & Wellness — Organic Skincare Rituals | India's Premium Botanical Skincare</title>
+    <meta name="description" content="TIVA Beauty & Wellness crafts organic, small-batch skincare rituals powered by botanical science. Explore our curated collection of serums, moisturizers, sunscreens & lip oils. AI-powered skin consultation included." />
+    <meta name="keywords" content="TIVA Beauty, organic skincare, botanical skincare, natural skincare India, vegan skincare, cruelty-free beauty, SPF 50 sunscreen, vitamin C serum, niacinamide, ceramide moisturizer, skincare rituals, AI skin analysis, luxury skincare India" />
+    <meta name="author" content="TIVA Beauty & Wellness" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://tiva.co.in/" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+
+    <!-- Theme Color (browser address bar on mobile) -->
+    <meta name="theme-color" content="#141211" />
+    <meta name="msapplication-TileColor" content="#141211" />
+
+    <!-- Open Graph / Facebook / WhatsApp / Instagram -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://tiva.co.in/" />
+    <meta property="og:title" content="TIVA Beauty & Wellness — Organic Skincare Rituals" />
+    <meta property="og:description" content="India's premium botanical skincare. Small-batch, organic rituals crafted by science. AI-powered skin consultation. Explore serums, moisturizers, sunscreens & more." />
+    <meta property="og:image" content="https://tiva.co.in/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="TIVA Beauty & Wellness — Organic Skincare Rituals" />
+    <meta property="og:site_name" content="TIVA Beauty & Wellness" />
+    <meta property="og:locale" content="en_IN" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://tiva.co.in/" />
+    <meta name="twitter:title" content="TIVA Beauty & Wellness — Organic Skincare Rituals" />
+    <meta name="twitter:description" content="India's premium botanical skincare. Small-batch, organic rituals crafted by science. AI-powered skin consultation." />
+    <meta name="twitter:image" content="https://tiva.co.in/og-image.png" />
+
+    <!-- Preconnect to Google Fonts for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Structured Data (JSON-LD) for Google Rich Results -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "TIVA Beauty & Wellness",
+      "url": "https://tiva.co.in",
+      "logo": "https://tiva.co.in/favicon.png",
+      "description": "India's premium botanical skincare brand crafting organic, small-batch skincare rituals.",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "irfan@tiva.co.in",
+        "contactType": "customer service"
+      },
+      "sameAs": [
+        "https://www.instagram.com/tiva.naturals"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Tirupati",
+        "addressRegion": "Andhra Pradesh",
+        "addressCountry": "IN"
+      }
+    }
+    </script>
+
+    <!-- Product Structured Data for Google Shopping -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "TIVA Skincare Collection",
+      "numberOfItems": 5,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "Product",
+            "name": "TIVA Tinted Sunscreen SPF 50+",
+            "description": "Broad-spectrum mineral sunscreen with 18% Zinc Oxide, organic botanical extracts.",
+            "brand": { "@type": "Brand", "name": "TIVA Beauty & Wellness" },
+            "offers": {
+              "@type": "Offer",
+              "price": "799",
+              "priceCurrency": "INR",
+              "availability": "https://schema.org/PreOrder"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "Product",
+            "name": "TIVA Glass Lip Oil",
+            "description": "Hydrating glass lip oil with natural botanical oils for a glossy, nourished finish.",
+            "brand": { "@type": "Brand", "name": "TIVA Beauty & Wellness" },
+            "offers": {
+              "@type": "Offer",
+              "price": "599",
+              "priceCurrency": "INR",
+              "availability": "https://schema.org/PreOrder"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "Product",
+            "name": "TIVA Barrier Cloud Moisturizer",
+            "description": "Ceramide-rich moisturizer for skin barrier restoration and deep hydration.",
+            "brand": { "@type": "Brand", "name": "TIVA Beauty & Wellness" },
+            "offers": {
+              "@type": "Offer",
+              "price": "450",
+              "priceCurrency": "INR",
+              "availability": "https://schema.org/PreOrder"
+            }
           }
         }
-      })();
+      ]
+    }
     </script>
   </head>
   <body>
@@ -45,4 +134,5 @@
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
+
 
