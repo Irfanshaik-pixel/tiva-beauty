@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Playfair Display", "Georgia", serif;
+  --font-sans: "Josefin Sans", "Arial", sans-serif;
+  --color-ivory: #141211;
+  --color-beige: #2E2A27;
+  --color-gold: #C29F65;
+  --color-taupe: #9F8F81;
+  --color-charcoal: #FAF7F2;
+  --color-white: #1C1917;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-charcoal);
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+}
+

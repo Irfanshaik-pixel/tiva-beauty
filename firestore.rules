@@ -1,0 +1,63 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() { return request.auth != null; }
+    function isValidId(id) { return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); }
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+
+    function isValidUser(data) {
+      return data.keys().hasAll(['email', 'createdAt']) &&
+             data.keys().size() == 2 &&
+             data.email is string && data.email.size() <= 100 &&
+             data.createdAt is timestamp;
+    }
+
+    match /users/{userId} {
+      allow get: if isSignedIn() && request.auth.uid == userId && isValidId(userId);
+      allow create: if isSignedIn() && request.auth.uid == userId && isValidId(userId) &&
+                       isValidUser(incoming()) && incoming().createdAt == request.time;
+      allow update: if isSignedIn() && request.auth.uid == userId && isValidId(userId) &&
+                       isValidUser(incoming()) && 
+                       incoming().diff(existing()).affectedKeys().hasOnly(['email']) &&
+                       incoming().createdAt == existing().createdAt;
+      allow delete: if false; // Users shouldn't be deleted purely from client side
+    }
+
+    function isValidShippingInfo(info) {
+      return info.keys().hasAll(['firstName', 'lastName', 'street', 'city', 'state', 'pincode', 'country']) &&
+             info.firstName is string && info.firstName.size() <= 50 &&
+             info.lastName is string && info.lastName.size() <= 50 &&
+             info.street is string && info.street.size() <= 100 &&
+             info.city is string && info.city.size() <= 50 &&
+             info.state is string && info.state.size() <= 50 &&
+             info.pincode is string && info.pincode.size() <= 20 &&
+             info.country is string && info.country.size() <= 50;
+    }
+
+    function isValidOrder(data) {
+      return data.keys().hasAll(['userId', 'total', 'status', 'createdAt', 'shippingInfo']) &&
+             data.keys().size() == 5 &&
+             data.userId is string && data.userId == request.auth.uid &&
+             data.total is number && data.total >= 0 &&
+             data.status is string && data.status in ['pending', 'processing', 'shipped', 'delivered'] &&
+             data.createdAt is timestamp &&
+             isValidShippingInfo(data.shippingInfo);
+    }
+
+    match /orders/{orderId} {
+      allow get: if isSignedIn() && existing().userId == request.auth.uid && isValidId(orderId);
+      allow list: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() && isValidId(orderId) &&
+                       isValidOrder(incoming()) && incoming().createdAt == request.time && incoming().status == 'pending';
+      allow update: if false; // Client shouldn't update orders directly
+      allow delete: if false; // Client shouldn't delete orders directly
+    }
+  }
+}

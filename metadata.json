@@ -1,0 +1,6 @@
+{
+  "name": "TIVA Beauty & Wellness",
+  "description": "An interactive luxury editorial campaign and products showcase for TIVA, a modern beauty house focusing on minimal ingredients and scientific formulations.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
