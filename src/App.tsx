@@ -10,7 +10,7 @@ import Navigation from "./components/Navigation";
 import Hero from "./components/Hero";
 import ShopCollection from "./components/ShopCollection";
 import IngredientCodex from "./components/IngredientCodex";
-import RitualConsultant from "./components/RitualConsultant";
+
 import Journal from "./components/Journal";
 import CartDrawer from "./components/CartDrawer";
 import ProductDetail from "./components/ProductDetail";
