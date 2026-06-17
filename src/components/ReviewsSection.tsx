@@ -6,61 +6,61 @@ const REVIEWS = [
   {
     name: "Priya S.",
     city: "Mumbai, MH",
-    stars: 5,
+    stars: 5.0,
     text: "Finally, a sunscreen that doesn't melt off in the Mumbai humidity. It leaves zero white cast on my warm skin tone and feels like absolute silk. A staple in my routine now.",
   },
   {
     name: "Ananya R.",
     city: "Delhi, NCR",
-    stars: 5,
+    stars: 4.8,
     text: "The Vitamin C serum completely transformed my dullness within three weeks. It’s so hard to find formulations that are gentle yet effective for hyperpigmentation. Absolutely luxurious.",
   },
   {
     name: "Meera K.",
     city: "Bangalore, KA",
-    stars: 5,
+    stars: 5.0,
     text: "I've replaced my high-end international cleansers with this. It doesn't strip my skin at all, and the packaging feels incredibly premium on my vanity. Worth every rupee.",
   },
   {
     name: "Neha V.",
     city: "Chennai, TN",
-    stars: 5,
+    stars: 4.5,
     text: "The elegant tint in the sunscreen is perfect for daily wear. It beautifully blurs imperfections without feeling heavy in the coastal heat. Highly recommend.",
   },
   {
     name: "Kritika M.",
     city: "Pune, MH",
-    stars: 5,
+    stars: 5.0,
     text: "My skin barrier was compromised from over-exfoliation, and this recovery serum felt like a comforting hug. Extremely lightweight yet deeply nourishing. Absolutely adore the texture.",
   },
   {
     name: "Sneha J.",
     city: "Hyderabad, TG",
-    stars: 5,
+    stars: 4.9,
     text: "The lip oil is pure magic. It gives a sophisticated glassy shine without any of the stickiness you get with other glosses. The subtle tint looks stunning on my natural lip color.",
   },
   {
     name: "Roshni D.",
     city: "Kolkata, WB",
-    stars: 5,
+    stars: 5.0,
     text: "Finding a moisturizer that works in the humid monsoon season is a nightmare, but TIVA nailed it. Sinks in immediately, zero greasiness, and leaves my skin plump all day.",
   },
   {
     name: "Aarti P.",
     city: "Ahmedabad, GJ",
-    stars: 5,
+    stars: 4.7,
     text: "I was skeptical about AI recommended routines, but my curated ritual has completely cleared my texture issues within a month. Incredible personalization.",
   },
   {
     name: "Divya C.",
     city: "Chandigarh, CH",
-    stars: 5,
+    stars: 5.0,
     text: "The cleanser takes off all my waterproof makeup without stripping my skin dry. Finally a luxury Indian brand that truly understands our skin concerns.",
   },
   {
     name: "Vandana S.",
     city: "Jaipur, RJ",
-    stars: 5,
+    stars: 4.8,
     text: "I keep the serum in my bag everywhere I go. The glow it gives me in the dry desert heat is unmatched. TIVA is easily my favorite beauty discovery this year.",
   }
 ];
@@ -176,10 +176,25 @@ export default function ReviewsSection() {
             >
               <div>
                 <div className="flex items-center justify-between mb-8">
-                  <div className="flex gap-1 relative">
-                    {[...Array(review.stars)].map((_, j) => (
-                      <Star key={j} className="w-4 h-4 fill-gold text-gold" />
-                    ))}
+                  <div className="flex gap-2 relative items-center">
+                    <div className="flex gap-1">
+                      {[...Array(5)].map((_, j) => {
+                        const isFull = review.stars >= j + 1;
+                        const isPartial = review.stars > j && review.stars < j + 1;
+                        const fillPercent = isFull ? 100 : isPartial ? (review.stars - j) * 100 : 0;
+                        return (
+                          <div key={j} className="relative w-4 h-4">
+                            {/* Empty Star */}
+                            <Star className="absolute inset-0 w-4 h-4 text-gold/30" />
+                            {/* Filled Star with dynamic width */}
+                            <div className="absolute inset-0 overflow-hidden" style={{ width: `${fillPercent}%` }}>
+                              <Star className="w-4 h-4 fill-gold text-gold" />
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <span className="text-[10px] font-mono text-gold/80 font-bold tracking-wider">{review.stars.toFixed(1)}</span>
                     <div className="absolute inset-0 bg-gold/20 blur-md rounded-full -z-10 group-hover:bg-gold/40 transition-colors duration-500" />
                   </div>
                   <div className="flex items-center gap-1.5 text-[10px] text-gold bg-gold/5 border border-gold/10 px-2.5 py-1 rounded-full uppercase tracking-widest font-mono">
