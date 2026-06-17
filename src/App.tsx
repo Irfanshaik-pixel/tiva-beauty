@@ -1,5 +1,5 @@
-import { useState, FormEvent } from "react";
-import { HelpCircle, ChevronDown, Send, Check, Sparkles, MapPin, Mail, Instagram } from "lucide-react";
+import { useState, useEffect, FormEvent } from "react";
+import { HelpCircle, ChevronDown, Send, Check, Sparkles, MapPin, Mail, Instagram, ArrowUp, MessageCircle } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 // Sub-components
@@ -29,8 +29,38 @@ export default function App() {
   const [selectedProductId, setSelectedProductId] = useState<string>("tiva-sunscreen");
   const [selectedArticleId, setSelectedArticleId] = useState<number | null>(null);
   const [currentSection, setCurrentSection] = useState<string>("home");
-  const [cart, setCart] = useState<CartItem[]>([]);
+  const [cart, setCart] = useState<CartItem[]>(() => {
+    try {
+      const saved = localStorage.getItem('tiva-cart');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        // Rehydrate cart items with full product data from PRODUCTS
+        return parsed.map((item: { productId: string; quantity: number }) => {
+          const product = PRODUCTS.find(p => p.id === item.productId);
+          return product ? { product, quantity: item.quantity } : null;
+        }).filter(Boolean) as CartItem[];
+      }
+    } catch {}
+    return [];
+  });
   const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  // Persist cart to localStorage whenever it changes
+  useEffect(() => {
+    const cartData = cart.map(item => ({
+      productId: item.product.id,
+      quantity: item.quantity
+    }));
+    localStorage.setItem('tiva-cart', JSON.stringify(cartData));
+  }, [cart]);
+
+  // Show/hide scroll-to-top button
+  useEffect(() => {
+    const handleScroll = () => setShowScrollTop(window.scrollY > 300);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   
   // FAQ accordion state
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
@@ -521,6 +551,50 @@ export default function App() {
           window.scrollTo({ top: 0, behavior: "smooth" });
         }}
       />
+
+      {/* 11. Floating WhatsApp Button */}
+      <a
+        href="https://wa.me/917893480367?text=Hi%20TIVA!%20I'm%20interested%20in%20your%20skincare%20products.%20Can%20you%20help%20me%20choose%20the%20right%20ritual%3F"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 z-50 group"
+        aria-label="Chat on WhatsApp"
+        id="whatsapp-btn"
+      >
+        <motion.div
+          className="flex items-center bg-[#25D366] text-white rounded-full shadow-lg shadow-[#25D366]/30 cursor-pointer overflow-hidden"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 2, type: "spring", stiffness: 200 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <div className="p-3.5">
+            <MessageCircle className="w-6 h-6" fill="white" />
+          </div>
+          <span className="hidden group-hover:inline-block pr-4 text-sm font-medium whitespace-nowrap transition-all">
+            Order on WhatsApp
+          </span>
+        </motion.div>
+      </a>
+
+      {/* 12. Scroll-to-Top Button */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.3 }}
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="fixed bottom-6 left-6 z-50 p-3 rounded-full bg-beige/80 backdrop-blur-sm border border-gold/20 text-gold hover:bg-gold hover:text-ivory transition-all cursor-pointer shadow-lg"
+            aria-label="Scroll to top"
+            id="scroll-top-btn"
+          >
+            <ArrowUp className="w-5 h-5" />
+          </motion.button>
+        )}
+      </AnimatePresence>
 
     </div>
   );
