@@ -1,8 +1,9 @@
-import { useState } from "react";
-import { Sparkles, Eye, ShoppingBag, X, Check, Bell } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Sparkles, Eye, ShoppingBag, X, Check, Bell, Info } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { PRODUCTS } from "../data";
 import { Product } from "../types";
+import LazyImage from "./ui/LazyImage";
 
 interface ShopCollectionProps {
   onAddProduct: (prod: Product) => void;
@@ -106,20 +107,18 @@ export default function ShopCollection({ onAddProduct, onProductClick, onNotifyM
                   <div className="flex w-full h-full overflow-x-auto snap-x snap-mandatory overscroll-x-contain [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                     {product.images.map((imgUrl, idx) => (
                       <div key={idx} className="w-full h-full shrink-0 snap-center relative">
-                        <img
+                        <LazyImage
                           src={imgUrl}
                           alt={`${product.name} - view ${idx + 1}`}
-                          referrerPolicy="no-referrer"
                           className="w-full h-full object-cover"
                         />
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <img
+                  <LazyImage
                     src={product.image}
                     alt={product.name}
-                    referrerPolicy="no-referrer"
                     className="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-700 ease-out"
                   />
                 )}
@@ -231,10 +230,9 @@ export default function ShopCollection({ onAddProduct, onProductClick, onNotifyM
 
               {/* Col Left: Beautiful Image Render */}
               <div className="md:col-span-5 h-[260px] md:h-full min-h-[300px] rounded-xl overflow-hidden relative bg-beige/10">
-                <img
+                <LazyImage
                   src={modalProduct.image}
                   alt={modalProduct.name}
-                  referrerPolicy="no-referrer"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute top-4 left-4 bg-white/85 px-2 py-0.5 rounded-sm border border-beige/30">

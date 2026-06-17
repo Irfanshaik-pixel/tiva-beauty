@@ -7,6 +7,7 @@ import hydrationImage from "../assets/images/regenerated_image_1781425378429.png
 import vitaminCImage from "../assets/images/regenerated_image_1781425499348.png";
 import ceramidesImage from "../assets/images/regenerated_image_1781425731683.png";
 import morningNightImage from "../assets/images/regenerated_image_1781425839675.png";
+import LazyImage from "./ui/LazyImage";
 
 // Fake Articles Data
 const CATEGORIES = [
@@ -173,7 +174,7 @@ export default function JournalPage({ onArticleClick }: { onArticleClick?: (id: 
           >
             <div className="grid grid-cols-1 lg:grid-cols-2">
               <div className="relative h-80 lg:h-full min-h-[20rem] overflow-hidden">
-                <img src={featuredArticle.image} alt={featuredArticle.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+                <LazyImage src={featuredArticle.image} alt={featuredArticle.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
               </div>
               <div className="p-8 md:p-16 flex flex-col justify-center">
                 <div className="flex items-center space-x-4 mb-6 font-mono text-[10px] text-taupe uppercase tracking-widest">
@@ -213,7 +214,7 @@ export default function JournalPage({ onArticleClick }: { onArticleClick?: (id: 
               className="group cursor-pointer"
             >
               <div className="rounded-2xl overflow-hidden mb-6 h-64 relative border border-beige/50">
-                <img src={article.image} alt={article.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <LazyImage src={article.image} alt={article.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest text-charcoal shadow-sm">
                   {article.category}
                 </div>

@@ -3,6 +3,7 @@ import { ArrowLeft, Check, ChevronRight, Shield, Sparkles, Droplet, Bell } from 
 import { motion, AnimatePresence } from "motion/react";
 import { Product } from "../types";
 import { PRODUCTS } from "../data";
+import LazyImage from "./ui/LazyImage";
 
 interface ProductDetailProps {
   productId: string;
@@ -125,7 +126,11 @@ export default function ProductDetail({ productId, onBack, onAddToCart, onNotify
                     }`}
                   >
                     {img ? (
-                      <img src={img} className="w-full h-full object-cover rounded-sm" alt={`${product.name} view ${idx + 1}`} />
+                      <LazyImage 
+                        src={img} 
+                        className="w-full h-full object-cover rounded-sm" 
+                        alt={`${product.name} view ${idx + 1}`} 
+                      />
                     ) : (
                       <div className="w-full h-full bg-beige/10 rounded-sm flex items-center justify-center transition-colors group-hover:bg-beige/20">
                         <span className="text-[18px] font-light text-taupe/40 leading-none mb-1">+</span>

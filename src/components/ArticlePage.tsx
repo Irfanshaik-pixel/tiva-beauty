@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import { motion, useScroll, useSpring } from "motion/react";
 import { ArrowLeft, Clock, Share2, Facebook, Twitter, Linkedin, Bookmark } from "lucide-react";
 import { ARTICLES } from "./JournalPage";
-import spfDetailImage from "../assets/images/regenerated_image_1781424893564.png";
+import spfDetailImage from "../assets/images/regenerated_image_1781425499348.png";
+import ceramidesImage from "../assets/images/regenerated_image_1781425731683.png";
+import morningNightImage from "../assets/images/regenerated_image_1781425839675.png";
+import LazyImage from "./ui/LazyImage";
 
 const luxuryEase = [0.22, 1, 0.36, 1];
 
@@ -168,7 +171,10 @@ export default function ArticlePage({ id, onBack }: { id: number, onBack: () => 
           initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, ease: luxuryEase }}
           className="w-full h-[637.844px] rounded-3xl overflow-hidden mb-20 shadow-xl shadow-beige/20 relative"
         >
-           <img src={article.id === 3 ? spfDetailImage : article.image} alt={article.title} className="w-full h-[637.844px] object-cover" />
+           <div className="relative h-full">
+            <LazyImage src={article.id === 3 ? spfDetailImage : article.image} alt={article.title} className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-transparent mix-blend-multiply" />
+           </div>
         </motion.div>
 
         {/* Content Body */}

@@ -2,6 +2,7 @@ import { Sparkles, Trash2, Plus, Minus, X, Check, Truck } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useState } from "react";
 import { CartItem } from "../types";
+import LazyImage from "./ui/LazyImage";
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -172,10 +173,9 @@ export default function CartDrawer({
                       >
                         {/* Image scale */}
                         <div className="w-20 aspect-[3/4] rounded-lg overflow-hidden relative border border-beige/30 shrink-0 bg-beige/10">
-                          <img
+                          <LazyImage
                             src={item.product.image}
                             alt={item.product.name}
-                            referrerPolicy="no-referrer"
                             className="w-full h-full object-cover"
                           />
                         </div>

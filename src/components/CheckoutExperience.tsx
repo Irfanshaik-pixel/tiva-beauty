@@ -5,6 +5,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { type CartItem } from "../types";
+import LazyImage from "./ui/LazyImage";
 
 interface CheckoutExperienceProps {
   cart: CartItem[];
@@ -144,7 +145,7 @@ export default function CheckoutExperience({ cart, onBack, onClearCart }: Checko
                   {cart.map((item) => (
                     <div key={item.product.id} className="flex gap-5 group">
                       <div className="w-20 h-24 bg-white/5 rounded-2xl overflow-hidden shrink-0 border border-white/5 relative">
-                        <img src={item.product.image} className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700" alt="" />
+                        <LazyImage src={item.product.image} className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700" alt="" />
                         <div className="absolute top-0 right-0 bg-[#070708]/90 backdrop-blur-md text-white w-6 h-6 flex items-center justify-center text-[10px] rounded-bl-xl font-mono border-b border-l border-white/10">
                           {item.quantity}
                         </div>
@@ -224,7 +225,7 @@ export default function CheckoutExperience({ cart, onBack, onClearCart }: Checko
             {[1,2,3,4].map((i) => (
               <div key={i} className="group cursor-pointer">
                 <div className="bg-white/5 aspect-[4/5] rounded-2xl overflow-hidden relative mb-5 border border-white/5">
-                  <img src={`https://images.unsplash.com/photo-1615397323215-626a575b223d?q=80&w=400&auto=format&fit=crop`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" alt="" />
+                  <LazyImage src={`https://images.unsplash.com/photo-1615397323215-626a575b223d?q=80&w=400&auto=format&fit=crop`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" alt="" />
                 </div>
                 <h4 className="text-sm font-medium mb-1 truncate text-white/90">Barrier Recovery Serum</h4>
                 <p className="font-mono text-xs text-gold/70 mb-4">₹1250.00</p>
