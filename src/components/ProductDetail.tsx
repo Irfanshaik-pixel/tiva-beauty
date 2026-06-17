@@ -221,8 +221,13 @@ export default function ProductDetail({ productId, onBack, onAddToCart, onNotify
                     {SHADES.map((shadeObj) => (
                       <button
                         key={shadeObj.name}
-                        onClick={() => setSelectedShade(shadeObj.name)}
-                        className={`relative px-4 py-3 border rounded-lg text-left cursor-pointer transition-all flex items-center space-x-3 ${
+                        type="button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          setSelectedShade(shadeObj.name);
+                        }}
+                        className={`relative z-20 pointer-events-auto px-4 py-3 border rounded-lg text-left cursor-pointer transition-all flex items-center space-x-3 ${
                           selectedShade === shadeObj.name
                             ? "border-gold bg-gold/5 shadow-sm"
                             : "border-beige/40 bg-white hover:border-gold/50"
