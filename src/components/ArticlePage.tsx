@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { motion, useScroll, useSpring } from "motion/react";
 import { ArrowLeft, Clock, Share2, Facebook, Twitter, Linkedin, Bookmark } from "lucide-react";
 import { ARTICLES } from "./JournalPage";
-import spfDetailImage from "../assets/images/regenerated_image_1781425499348.png";
-import ceramidesImage from "../assets/images/regenerated_image_1781425731683.png";
-import morningNightImage from "../assets/images/regenerated_image_1781425839675.png";
+import spfDetailImage from "../assets/images/regenerated_image_1781425499348.webp";
+import ceramidesImage from "../assets/images/regenerated_image_1781425731683.webp";
+import morningNightImage from "../assets/images/regenerated_image_1781425839675.webp";
 import LazyImage from "./ui/LazyImage";
 
 const luxuryEase = [0.22, 1, 0.36, 1];

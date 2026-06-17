@@ -1,16 +1,16 @@
 import { Product, Ingredient, JournalArticle } from "./types";
-import sunscreenImage from "./assets/images/regenerated_image_1781346789571.png";
-import lipOilImage from "./assets/images/regenerated_image_1781364684011.png";
-import moisturizerImage from "./assets/images/regenerated_image_1781365633158.png";
-import serumImage from "./assets/images/regenerated_image_1781366235570.png";
-import cleanserImage from "./assets/images/regenerated_image_1781366630237.png";
-import extraImage1 from "./assets/images/regenerated_image_1781412242018.png";
-import extraImage2 from "./assets/images/regenerated_image_1781412245258.png";
-import shadeFaceImage from "./assets/images/regenerated_image_1781412908059.png";
-import shadeArmImage from "./assets/images/regenerated_image_1781412912168.png";
-import journalImage2 from "./assets/images/regenerated_image_1781450107551.png";
-import journalImage1 from "./assets/images/regenerated_image_1781450269431.png";
-import productBackImage from "./assets/images/regenerated_image_1781450951600.png";
+import sunscreenImage from "./assets/images/regenerated_image_1781346789571.webp";
+import lipOilImage from "./assets/images/regenerated_image_1781364684011.webp";
+import moisturizerImage from "./assets/images/regenerated_image_1781365633158.webp";
+import serumImage from "./assets/images/regenerated_image_1781366235570.webp";
+import cleanserImage from "./assets/images/regenerated_image_1781366630237.webp";
+import extraImage1 from "./assets/images/regenerated_image_1781412242018.webp";
+import extraImage2 from "./assets/images/regenerated_image_1781412245258.webp";
+import shadeFaceImage from "./assets/images/regenerated_image_1781412908059.webp";
+import shadeArmImage from "./assets/images/regenerated_image_1781412912168.webp";
+import journalImage2 from "./assets/images/regenerated_image_1781450107551.webp";
+import journalImage1 from "./assets/images/regenerated_image_1781450269431.webp";
+import productBackImage from "./assets/images/regenerated_image_1781450951600.webp";
 
 export const PRODUCTS: Product[] = [
   {
@@ -29,12 +29,12 @@ export const PRODUCTS: Product[] = [
       "Calms environmental heat redness and skin stress instantly"
     ],
     usage: "Dispense a coordinate portion onto your fingertips as the final matinal skincare act. Press gently across your face, neck, and décolletage.",
-    image: "https://i.postimg.cc/9QvNz53C/Chat-GPT-Image-Jun-10-2026-01-39-22-PM.png", 
-    images: ["https://i.postimg.cc/9QvNz53C/Chat-GPT-Image-Jun-10-2026-01-39-22-PM.png", 
-      "https://i.postimg.cc/FH2n15tv/Chat-GPT-Image-Jun-10-2026-01-59-59-PM.png", 
-      "https://i.postimg.cc/WpHmsmLM/Chat-GPT-Image-Jun-12-2026-12-44-02-PM.png",
-      "https://i.postimg.cc/RZsH4fYv/5895e97c-eb5a-4c70-98cf-6bdc0c9efb42.png",
-      "https://i.postimg.cc/cJSMVsyn/Chat-GPT-Image-Jun-10-2026-02-23-08-PM.png"]
+    image: "https://i.postimg.cc/9QvNz53C/Chat-GPT-Image-Jun-10-2026-01-39-22-PM.webp", 
+    images: ["https://i.postimg.cc/9QvNz53C/Chat-GPT-Image-Jun-10-2026-01-39-22-PM.webp", 
+      "https://i.postimg.cc/FH2n15tv/Chat-GPT-Image-Jun-10-2026-01-59-59-PM.webp", 
+      "https://i.postimg.cc/WpHmsmLM/Chat-GPT-Image-Jun-12-2026-12-44-02-PM.webp",
+      "https://i.postimg.cc/RZsH4fYv/5895e97c-eb5a-4c70-98cf-6bdc0c9efb42.webp",
+      "https://i.postimg.cc/cJSMVsyn/Chat-GPT-Image-Jun-10-2026-02-23-08-PM.webp"]
   },
   {
     id: "tiva-serum",
@@ -57,13 +57,13 @@ export const PRODUCTS: Product[] = [
       "Dermatologically Tested"
     ],
     usage: "Apply directly using the precision applicator. Wear alone for a naturally glossy look or layer over lipstick for enhanced shine and hydration. Reapply as desired throughout the day.",
-    image: "https://i.postimg.cc/65DQ00Fp/Chat-GPT-Image-Jun-10-2026-03-50-58-PM.png",
+    image: "https://i.postimg.cc/65DQ00Fp/Chat-GPT-Image-Jun-10-2026-03-50-58-PM.webp",
     images: [
       lipOilImage,
-      "https://i.postimg.cc/9Q5WTfqy/Chat-GPT-Image-Jun-10-2026-03-51-09-PM.png", 
-      "https://i.postimg.cc/qRR00hWP/Chat-GPT-Image-Jun-10-2026-03-37-22-PM.png",
-      "https://i.postimg.cc/J4JsSvNT/Chat-GPT-Image-Jun-10-2026-03-51-27-PM.png",
-      "https://i.postimg.cc/65R8FgrL/Chat-GPT-Image-Jun-10-2026-03-51-34-PM.png"
+      "https://i.postimg.cc/9Q5WTfqy/Chat-GPT-Image-Jun-10-2026-03-51-09-PM.webp", 
+      "https://i.postimg.cc/qRR00hWP/Chat-GPT-Image-Jun-10-2026-03-37-22-PM.webp",
+      "https://i.postimg.cc/J4JsSvNT/Chat-GPT-Image-Jun-10-2026-03-51-27-PM.webp",
+      "https://i.postimg.cc/65R8FgrL/Chat-GPT-Image-Jun-10-2026-03-51-34-PM.webp"
     ]
   },
   {
@@ -86,13 +86,13 @@ export const PRODUCTS: Product[] = [
       "Layers seamlessly under sunscreen and makeup"
     ],
     usage: "Scoop a small amount of moisturizer. Apply evenly to cleansed face and neck. Gently massage until fully absorbed.",
-    image: "https://i.postimg.cc/MpvFW0Gr/Chat-GPT-Image-Jun-11-2026-12-31-23-PM.png",
+    image: "https://i.postimg.cc/MpvFW0Gr/Chat-GPT-Image-Jun-11-2026-12-31-23-PM.webp",
     images: [
       moisturizerImage,
-      "https://i.postimg.cc/4xmSJv3W/Chat-GPT-Image-Jun-11-2026-12-31-55-PM.png",
-      "https://i.postimg.cc/QdHyXgMY/Chat-GPT-Image-Jun-11-2026-12-32-17-PM.png",
-      "https://i.postimg.cc/W1hH2m4X/Chat-GPT-Image-Jun-11-2026-12-32-25-PM.png",
-      "https://i.postimg.cc/wj7G65Bs/Chat-GPT-Image-Jun-11-2026-12-32-31-PM.png"
+      "https://i.postimg.cc/4xmSJv3W/Chat-GPT-Image-Jun-11-2026-12-31-55-PM.webp",
+      "https://i.postimg.cc/QdHyXgMY/Chat-GPT-Image-Jun-11-2026-12-32-17-PM.webp",
+      "https://i.postimg.cc/W1hH2m4X/Chat-GPT-Image-Jun-11-2026-12-32-25-PM.webp",
+      "https://i.postimg.cc/wj7G65Bs/Chat-GPT-Image-Jun-11-2026-12-32-31-PM.webp"
     ]
   },
   {
@@ -115,13 +115,13 @@ export const PRODUCTS: Product[] = [
       "Dermatologically tested"
     ],
     usage: "Lightweight silky serum with a natural golden tint that glides effortlessly across the skin and leaves a healthy luminous finish.",
-    image: "https://i.postimg.cc/B6V8GG75/Chat-GPT-Image-Jun-11-2026-02-58-10-PM.png",
+    image: "https://i.postimg.cc/B6V8GG75/Chat-GPT-Image-Jun-11-2026-02-58-10-PM.webp",
     images: [
       serumImage,
-      "https://i.postimg.cc/B6V8GG75/Chat-GPT-Image-Jun-11-2026-02-58-10-PM.png",
-      "https://i.postimg.cc/3JMXyg9Z/Chat-GPT-Image-Jun-14-2026-11-02-10-AM.png",
-      "https://i.postimg.cc/L6B1nGJH/Chat-GPT-Image-Jun-11-2026-02-59-37-PM.png",
-      "https://i.postimg.cc/J4WX7Rz7/Chat-GPT-Image-Jun-11-2026-03-12-02-PM.png"
+      "https://i.postimg.cc/B6V8GG75/Chat-GPT-Image-Jun-11-2026-02-58-10-PM.webp",
+      "https://i.postimg.cc/3JMXyg9Z/Chat-GPT-Image-Jun-14-2026-11-02-10-AM.webp",
+      "https://i.postimg.cc/L6B1nGJH/Chat-GPT-Image-Jun-11-2026-02-59-37-PM.webp",
+      "https://i.postimg.cc/J4WX7Rz7/Chat-GPT-Image-Jun-11-2026-03-12-02-PM.webp"
     ]
   },
   {
@@ -143,13 +143,13 @@ export const PRODUCTS: Product[] = [
       "Leaves skin soft, balanced & refreshed"
     ],
     usage: "Crystal-clear silky gel that transforms into a soft, airy micro-foam upon contact with water for a luxurious cleansing experience.",
-    image: "https://i.postimg.cc/SQ1PHtSh/Chat-GPT-Image-Jun-11-2026-01-43-44-PM.png",
+    image: "https://i.postimg.cc/SQ1PHtSh/Chat-GPT-Image-Jun-11-2026-01-43-44-PM.webp",
     images: [
-      "https://i.postimg.cc/SQ1PHtSh/Chat-GPT-Image-Jun-11-2026-01-43-44-PM.png", 
-      "https://i.postimg.cc/zfPd4yNM/Chat-GPT-Image-Jun-14-2026-11-06-15-AM.png", 
-      "https://i.postimg.cc/d3RjQ3MM/Chat-GPT-Image-Jun-11-2026-01-44-40-PM.png", 
-      "https://i.postimg.cc/nrKGVzyy/Chat-GPT-Image-Jun-11-2026-01-44-54-PM.png",
-      "https://i.postimg.cc/rs29LWPB/Chat-GPT-Image-Jun-11-2026-01-45-20-PM.png"
+      "https://i.postimg.cc/SQ1PHtSh/Chat-GPT-Image-Jun-11-2026-01-43-44-PM.webp", 
+      "https://i.postimg.cc/zfPd4yNM/Chat-GPT-Image-Jun-14-2026-11-06-15-AM.webp", 
+      "https://i.postimg.cc/d3RjQ3MM/Chat-GPT-Image-Jun-11-2026-01-44-40-PM.webp", 
+      "https://i.postimg.cc/nrKGVzyy/Chat-GPT-Image-Jun-11-2026-01-44-54-PM.webp",
+      "https://i.postimg.cc/rs29LWPB/Chat-GPT-Image-Jun-11-2026-01-45-20-PM.webp"
     ]
   }
 ];

@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Search, Heart, ArrowRight, BookOpen, Clock, Droplet, User, FlaskConical, Beaker, Sun } from "lucide-react";
-import featuredImage from "../assets/images/regenerated_image_1781420113594.png";
-import skinBarrierImage from "../assets/images/regenerated_image_1781421376732.png";
-import hydrationImage from "../assets/images/regenerated_image_1781425378429.png";
-import vitaminCImage from "../assets/images/regenerated_image_1781425499348.png";
-import ceramidesImage from "../assets/images/regenerated_image_1781425731683.png";
-import morningNightImage from "../assets/images/regenerated_image_1781425839675.png";
+import featuredImage from "../assets/images/regenerated_image_1781420113594.webp";
+import skinBarrierImage from "../assets/images/regenerated_image_1781421376732.webp";
+import hydrationImage from "../assets/images/regenerated_image_1781425378429.webp";
+import vitaminCImage from "../assets/images/regenerated_image_1781425499348.webp";
+import ceramidesImage from "../assets/images/regenerated_image_1781425731683.webp";
+import morningNightImage from "../assets/images/regenerated_image_1781425839675.webp";
 import LazyImage from "./ui/LazyImage";
 
 // Fake Articles Data
