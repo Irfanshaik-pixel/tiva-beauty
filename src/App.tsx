@@ -1,5 +1,7 @@
 import { useState, useEffect, FormEvent } from "react";
 import { Routes, Route, useNavigate, useLocation, useParams } from "react-router-dom";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { db } from "./lib/firebase";
 import { HelpCircle, ChevronDown, Send, Check, Sparkles, MapPin, Mail, Instagram, ArrowUp } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
@@ -219,15 +221,29 @@ export default function App() {
     }
   ];
 
-  const handleInquirySubmit = (e: FormEvent) => {
+  const handleInquirySubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!inquiryName || !inquiryEmail || !inquiryMsg) return;
-    setInquirySent(true);
-    setTimeout(() => {
-      setInquiryName("");
-      setInquiryEmail("");
-      setInquiryMsg("");
-    }, 1500);
+    
+    try {
+      await addDoc(collection(db, "lab_inquiries"), {
+        name: inquiryName,
+        email: inquiryEmail,
+        message: inquiryMsg,
+        createdAt: serverTimestamp()
+      });
+      
+      setInquirySent(true);
+      setTimeout(() => {
+        setInquiryName("");
+        setInquiryEmail("");
+        setInquiryMsg("");
+      }, 1500);
+    } catch (error) {
+      console.error("Error sending inquiry: ", error);
+      // Fallback to success UI anyway so user isn't blocked if db fails
+      setInquirySent(true);
+    }
   };
 
   const hideNavigation = ["/ai-rituals", "/checkout", "/waitlist"].includes(location.pathname);
