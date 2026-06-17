@@ -316,6 +316,11 @@ async function startServer() {
     }
   });
 
+  // Health check endpoint for Render
+  app.get("/health", (req, res) => {
+    res.status(200).send("OK");
+  });
+
   // Vite development middleware setup
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
@@ -331,9 +336,13 @@ async function startServer() {
     });
   }
 
-  app.listen(PORT, "0.0.0.0", () => {
+  // Omitting host binds to both IPv4 and IPv6 (:: and 0.0.0.0), which fixes Render port scan timeouts
+  app.listen(PORT, () => {
     console.log(`Server successfully initiated on port ${PORT} [Mode: ${process.env.NODE_ENV || "development"}]`);
   });
 }
 
-startServer();
+startServer().catch(err => {
+  console.error("Critical server failure:", err);
+  process.exit(1);
+});
