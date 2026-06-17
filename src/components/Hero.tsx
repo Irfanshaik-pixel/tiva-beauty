@@ -3,6 +3,8 @@ import { ArrowRight, RotateCcw, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { PRODUCTS } from "../data";
 import { Product } from "../types";
+import productFrontImg from "../assets/images/product-front.webp";
+import productBackImg from "../assets/images/product-back.webp";
 
 interface HeroProps {
   onExplore: () => void;
@@ -167,7 +169,7 @@ export default function Hero({ onExplore, onDiscoverRitual, onAddProduct, onProd
                 style={{ backfaceVisibility: "hidden", transform: "rotateY(0deg) translateZ(1px)" }}
               >
                 <img 
-                  src="/product-front.webp" 
+                  src={productFrontImg} 
                   alt="TIVA Product Front" 
                   className="w-full h-full object-contain mix-blend-multiply drop-shadow-2xl scale-[1.35] lg:scale-150" 
                 />
@@ -179,7 +181,7 @@ export default function Hero({ onExplore, onDiscoverRitual, onAddProduct, onProd
                 style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg) translateZ(1px)" }}
               >
                 <img 
-                  src="/product-back.webp" 
+                  src={productBackImg} 
                   alt="TIVA Product Back" 
                   className="w-full h-full object-contain mix-blend-multiply drop-shadow-2xl scale-[1.35] lg:scale-150" 
                 />
