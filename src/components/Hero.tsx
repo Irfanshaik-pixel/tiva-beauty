@@ -171,6 +171,9 @@ export default function Hero({ onExplore, onDiscoverRitual, onAddProduct, onProd
                 <img 
                   src={productFrontImg} 
                   alt="TIVA Product Front" 
+                  fetchPriority="high"
+                  loading="eager"
+                  decoding="sync"
                   className="w-full h-full object-contain drop-shadow-2xl scale-[1.35] lg:scale-150" 
                 />
               </div>
@@ -183,6 +186,9 @@ export default function Hero({ onExplore, onDiscoverRitual, onAddProduct, onProd
                 <img 
                   src={productBackImg} 
                   alt="TIVA Product Back" 
+                  fetchPriority="high"
+                  loading="eager"
+                  decoding="sync"
                   className="w-full h-full object-contain drop-shadow-2xl scale-[1.35] lg:scale-150" 
                 />
               </div>

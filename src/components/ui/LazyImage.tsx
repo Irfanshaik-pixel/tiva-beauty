@@ -34,7 +34,7 @@ export default function LazyImage({
         });
       },
       {
-        rootMargin: "150px", // Start loading slightly before it comes into view
+        rootMargin: "800px", // Start loading much earlier before it comes into view
         threshold: 0.01,
       }
     );
@@ -85,7 +85,7 @@ export default function LazyImage({
             opacity: isLoaded ? 1 : 0, 
             filter: isLoaded ? "blur(0px)" : "blur(20px)" 
           }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.35, ease: "easeOut" }}
           className={`relative z-10 w-full h-full object-cover ${className}`}
           {...props}
         />
